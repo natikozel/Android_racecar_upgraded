@@ -1,7 +1,7 @@
 # Racecar VS Obstacles
 
 ## Overview
-Racecar Obstacle Dodger is a 2D racing game built in Android Studio using Java. 
+Racecar VS Obstacles is a 2D racing game built in Android Studio using Java. 
 Control your racecar to dodge obstacles that are constantly dropping from the road. 
 The game features smooth gameplay, animated obstacles, and a collision detection system.
 
@@ -23,7 +23,7 @@ The game features smooth gameplay, animated obstacles, and a collision detection
 ### Installation
 1. Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/racecar-obstacle-dodger.git
+    git clone https://github.com/natikozel/Android_racecar.git
     ```
 2. Open the project in Android Studio.
 3. Build the project to download necessary dependencies.
