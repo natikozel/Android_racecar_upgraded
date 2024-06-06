@@ -1,8 +1,8 @@
 # Racecar VS Obstacles
 
 ## Overview
-Racecar VS Obstacles is a 2D racing game built in Android Studio using Java. 
-Control your racecar to dodge obstacles that are constantly dropping from the road. 
+Racecar VS Obstacles is a 2D racing game built in Android Studio using Java.
+Control your racecar to dodge obstacles that are constantly dropping from the road.
 The game features smooth gameplay, animated obstacles, and a collision detection system.
 
 ## Features
@@ -12,7 +12,10 @@ The game features smooth gameplay, animated obstacles, and a collision detection
 - **Endless Mode**: Obstacles are generated endlessly to keep the game going.
 
 ## Screenshots
-![Gameplay](./app/src/assets/Gameplay.png)
+
+<img src="./app/src/assets/Gameplay.png" alt="drawing" width="200"/>
+
+
 
 ## Getting Started
 
