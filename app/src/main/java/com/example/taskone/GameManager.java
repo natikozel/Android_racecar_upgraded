@@ -8,6 +8,7 @@ import java.util.Arrays;
 public class GameManager {
 
     @SuppressLint("StaticFieldLeak")
+
     public static GameManager game;
 
     private int lives = 3;
@@ -55,8 +56,9 @@ public class GameManager {
             setLost(true);
         } else {
             GameSignal.getInstance().toast("CRASHED\nYou have " + (lives > 1 ? lives + "lives" : "1 life") + " left");
-            GameSignal.getInstance().vibrate();
         }
+        GameSignal.getInstance().vibrate();
+
     }
 
     public void announceAsLost() {
