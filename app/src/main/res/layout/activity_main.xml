@@ -1,55 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#8FB8B8B8"
-    tools:context=".ActivityGame">
-
-    <LinearLayout
-        android:id="@+id/road"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:baselineAligned="false"
-        android:orientation="horizontal">
-
-        <FrameLayout
-            android:id="@+id/lane1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-
-            <!-- Car or obstacle goes here -->
-        </FrameLayout>
-
-        <FrameLayout
-            android:id="@+id/lane2"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-            <!-- Car or obstacle goes here -->
-
-
-            <include layout="@layout/car"/>
-
-
-        </FrameLayout>
-
-        <FrameLayout
-            android:id="@+id/lane3"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-            <!-- Car or obstacle goes here -->
-        </FrameLayout>
-
-    </LinearLayout>
-
-
+    tools:context=".ActivityGame"
+    >
 
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -91,11 +51,11 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/left"
         style="@style/Widget.Material3.Button.Icon"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="40dp"
         android:layout_marginBottom="50dp"
         android:backgroundTint="#C20047"
         android:insetTop="0dp"
@@ -108,11 +68,11 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/right"
         style="@style/Widget.Material3.Button.Icon"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginRight="20dp"
+        android:layout_marginRight="40dp"
         android:layout_marginBottom="50dp"
         android:backgroundTint="#C20047"
         android:insetTop="0dp"
@@ -121,5 +81,128 @@
         app:iconGravity="textEnd"
         app:iconSize="52dp" />
 
+    <LinearLayout
+        android:id="@+id/road"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="3dp"
+        android:orientation="vertical"
+        android:weightSum="6">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="100dp"
+            android:orientation="horizontal">
+
+            <include layout="@layout/obstacle"
+                android:id="@+id/obstacle0" />
+
+            <include layout="@layout/obstacle"
+                android:id="@+id/obstacle1" />
+
+            <include layout="@layout/obstacle"
+                android:id="@+id/obstacle2" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <include layout="@layout/obstacle"
+                android:id="@+id/obstacle3" />
+
+            <include layout="@layout/obstacle"
+                android:id="@+id/obstacle4" />
+
+            <include layout="@layout/obstacle"
+                android:id="@+id/obstacle5" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <include layout="@layout/obstacle"
+                android:id="@+id/obstacle6" />
+
+            <include layout="@layout/obstacle"
+                android:id="@+id/obstacle7" />
+
+            <include layout="@layout/obstacle"
+                android:id="@+id/obstacle8" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <include layout="@layout/obstacle"
+                android:id="@+id/obstacle9" />
+
+            <include layout="@layout/obstacle"
+                android:id="@+id/obstacle10" />
+
+            <include layout="@layout/obstacle"
+                android:id="@+id/obstacle11" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <include layout="@layout/obstacle"
+                android:id="@+id/obstacle12" />
+
+            <include layout="@layout/obstacle"
+                android:id="@+id/obstacle13" />
+
+            <include layout="@layout/obstacle"
+                android:id="@+id/obstacle14" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_weight="0.7"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="100dp"
+            android:orientation="horizontal">
+
+            <include
+                android:visibility="invisible"
+                android:id="@+id/dragLeft"
+                layout="@layout/car" />
+
+            <include
+                android:id="@+id/dragCenter"
+                layout="@layout/car" />
+
+            <include
+                android:visibility="invisible"
+                android:id="@+id/dragRight"
+                layout="@layout/car" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>
