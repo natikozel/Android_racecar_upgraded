@@ -1,5 +1,15 @@
 <resources>
-    <string name="app_name">Taskone</string>
-    <string name="developer_name">Tal</string>
+    <string name="app_name">RaceCar</string>
+    <string name="developer_name">Netanel</string>
     <string name="title" translatable="false">Title</string>
+    <string name="odometer">Odometer: 0</string>
+    <string name="sensor_mode">Sensor Mode</string>
+    <string name="normal_fast_mode">Normal Fast Mode</string>
+    <string name="normal_slow_mode">Normal Slow Mode</string>
+    <string name="high_scores">High Scores</string>
+    <string name="game_over">GAME OVER</string>
+    <string name="write_your_name_down_below">Write your name down below!</string>
+    <string name="menu">Menu</string>
+    <string name="save">Save</string>
+    <string name="top_10_highest_scores">TOP 10 HIGHEST SCORES</string>
 </resources>

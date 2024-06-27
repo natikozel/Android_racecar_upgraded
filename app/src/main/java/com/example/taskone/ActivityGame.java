@@ -1,14 +1,11 @@
 package com.example.taskone;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.ObjectAnimator;
-import android.graphics.Rect;
+
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.view.animation.LinearInterpolator;
-import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +20,8 @@ public class ActivityGame extends AppCompatActivity {
     private AppCompatImageView[] car;
     private AppCompatImageView[] lives;
     private AppCompatImageView[][] obstacles;
+    private AppCompatImageView[][] coins;
+    private TextView odometer;
     private Handler ticker;
     private Runnable runnable;
 
@@ -43,21 +42,42 @@ public class ActivityGame extends AppCompatActivity {
                 findViewById(R.id.life1)
         };
         car = new AppCompatImageView[]{
-                findViewById(R.id.dragLeft),
-                findViewById(R.id.dragCenter),
-                findViewById(R.id.dragRight)
+                findViewById(R.id.car0),
+                findViewById(R.id.car1),
+                findViewById(R.id.car2),
+                findViewById(R.id.car3),
+                findViewById(R.id.car4)
         };
         obstacles = new AppCompatImageView[][]{
-                {findViewById(R.id.obstacle0), findViewById(R.id.obstacle1), findViewById(R.id.obstacle2)},
-                {findViewById(R.id.obstacle3), findViewById(R.id.obstacle4), findViewById(R.id.obstacle5)},
-                {findViewById(R.id.obstacle6), findViewById(R.id.obstacle7), findViewById(R.id.obstacle8)},
-                {findViewById(R.id.obstacle9), findViewById(R.id.obstacle10), findViewById(R.id.obstacle11)},
-                {findViewById(R.id.obstacle12), findViewById(R.id.obstacle13), findViewById(R.id.obstacle14)}
+                {findViewById(R.id.obstacle0), findViewById(R.id.obstacle1), findViewById(R.id.obstacle2), findViewById(R.id.obstacle3), findViewById(R.id.obstacle4)},
+                {findViewById(R.id.obstacle5), findViewById(R.id.obstacle6), findViewById(R.id.obstacle7), findViewById(R.id.obstacle8), findViewById(R.id.obstacle9)},
+                {findViewById(R.id.obstacle10), findViewById(R.id.obstacle11), findViewById(R.id.obstacle12), findViewById(R.id.obstacle13), findViewById(R.id.obstacle14)},
+                {findViewById(R.id.obstacle15), findViewById(R.id.obstacle16), findViewById(R.id.obstacle17), findViewById(R.id.obstacle18), findViewById(R.id.obstacle19)},
+                {findViewById(R.id.obstacle20), findViewById(R.id.obstacle21), findViewById(R.id.obstacle22), findViewById(R.id.obstacle23), findViewById(R.id.obstacle24)},
+                {findViewById(R.id.obstacle25), findViewById(R.id.obstacle26), findViewById(R.id.obstacle27), findViewById(R.id.obstacle28), findViewById(R.id.obstacle29)},
+                {findViewById(R.id.obstacle30), findViewById(R.id.obstacle31), findViewById(R.id.obstacle32), findViewById(R.id.obstacle33), findViewById(R.id.obstacle34)},
+                {findViewById(R.id.obstacle35), findViewById(R.id.obstacle36), findViewById(R.id.obstacle37), findViewById(R.id.obstacle38), findViewById(R.id.obstacle39)},
+                {findViewById(R.id.obstacle40), findViewById(R.id.obstacle41), findViewById(R.id.obstacle42), findViewById(R.id.obstacle43), findViewById(R.id.obstacle44)}
         };
+
+        coins = new AppCompatImageView[][]{
+                {findViewById(R.id.coin0), findViewById(R.id.coin1), findViewById(R.id.coin2), findViewById(R.id.coin3), findViewById(R.id.coin4)},
+                {findViewById(R.id.coin5), findViewById(R.id.coin6), findViewById(R.id.coin7), findViewById(R.id.coin8), findViewById(R.id.coin9)},
+                {findViewById(R.id.coin10), findViewById(R.id.coin11), findViewById(R.id.coin12), findViewById(R.id.coin13), findViewById(R.id.coin14)},
+                {findViewById(R.id.coin15), findViewById(R.id.coin16), findViewById(R.id.coin17), findViewById(R.id.coin18), findViewById(R.id.coin19)},
+                {findViewById(R.id.coin20), findViewById(R.id.coin21), findViewById(R.id.coin22), findViewById(R.id.coin23), findViewById(R.id.coin24)},
+                {findViewById(R.id.coin25), findViewById(R.id.coin26), findViewById(R.id.coin27), findViewById(R.id.coin28), findViewById(R.id.coin29)},
+                {findViewById(R.id.coin30), findViewById(R.id.coin31), findViewById(R.id.coin32), findViewById(R.id.coin33), findViewById(R.id.coin34)},
+                {findViewById(R.id.coin35), findViewById(R.id.coin36), findViewById(R.id.coin37), findViewById(R.id.coin38), findViewById(R.id.coin39)},
+                {findViewById(R.id.coin40), findViewById(R.id.coin41), findViewById(R.id.coin42), findViewById(R.id.coin43), findViewById(R.id.coin44)}
+        };
+
+
+        odometer = findViewById(R.id.odometer);
         left = findViewById(R.id.left);
         right = findViewById(R.id.right);
 
-        GameManager.init(this);
+        GameManager.init(this, GameMode.FAST_MODE);
         left.setOnClickListener(this::move);
         right.setOnClickListener(this::move);
         startTicking(1000);
@@ -75,43 +95,17 @@ public class ActivityGame extends AppCompatActivity {
 
     public <T extends View> void move(T view) throws IllegalArgumentException {
 
-        if (view == left)
-            GameManager.getInstance().moveCar(Direction.LEFT);
-        if (view == right)
-            GameManager.getInstance().moveCar(Direction.RIGHT);
-
-
-        switch (GameManager.getInstance().getCarIndex()) {
-            case 0:
-                if (!car[0].isShown()) {
-                    car[0].setVisibility(View.VISIBLE);
-                    car[1].setVisibility(View.INVISIBLE);
-                    car[2].setVisibility(View.INVISIBLE);
-                }
-                break;
-            case 1:
-                if (!car[1].isShown()) {
-                    car[0].setVisibility(View.INVISIBLE);
-                    car[1].setVisibility(View.VISIBLE);
-                    car[2].setVisibility(View.INVISIBLE);
-                }
-                break;
-            case 2:
-                if (!car[2].isShown()) {
-                    car[0].setVisibility(View.INVISIBLE);
-                    car[1].setVisibility(View.INVISIBLE);
-                    car[2].setVisibility(View.VISIBLE);
-                }
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + GameManager.getInstance().getCarIndex());
+        GameManager.getInstance().moveCar(view == left ? Direction.LEFT : Direction.RIGHT);
+        int carIndex = GameManager.getInstance().getCarIndex();
+        for (int i = 0; i < car.length; i++) {
+            car[i].setVisibility(i == carIndex ? View.VISIBLE : View.INVISIBLE);
         }
     }
 
 
     public void tick() {
         GameManager.getInstance().updateRoadMap();
-        GameManager.getInstance().newObstacle();
+        GameManager.getInstance().newSpawn();
         updateRoadMapUI();
 
         if (GameManager.getInstance().isLost())
@@ -121,14 +115,23 @@ public class ActivityGame extends AppCompatActivity {
     }
 
 
+    @SuppressLint("SetTextI18n")
     public void updateRoadMapUI() {
-        boolean[][] roadMap = GameManager.getInstance().getRoadMap();
+        this.odometer.setText("Odometer: " + GameManager.getInstance().getOdometer());
+        int[][] roadMap = GameManager.getInstance().getRoadMap();
         for (int i = 0; i < roadMap.length; i++) {
             for (int j = 0; j < roadMap[i].length; j++) {
-                if (roadMap[i][j])
-                    obstacles[i][j].setVisibility(View.VISIBLE);
-                else
+                if (roadMap[i][j] > 0) {
+                    if (roadMap[i][j] == 1) {
+                        obstacles[i][j].setVisibility(View.VISIBLE);
+                    } else {
+                        coins[i][j].setVisibility(View.VISIBLE);
+                    }
+                } else {
                     obstacles[i][j].setVisibility(View.INVISIBLE);
+                    coins[i][j].setVisibility(View.INVISIBLE);
+
+                }
             }
         }
     }
@@ -139,7 +142,7 @@ public class ActivityGame extends AppCompatActivity {
             @Override
             public void run() {
                 tick();
-                ticker.postDelayed(this, 850);
+                ticker.postDelayed(this, GameManager.getInstance().getDelay());
             }
         };
         ticker.postDelayed(runnable, initialDelay); // Initial delay

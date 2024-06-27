@@ -1,24 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#8FB8B8B8"
-    tools:context=".ActivityGame"
-    >
+    android:background="#C7E0F3"
+    tools:context=".ActivityGame">
 
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <!-- Odometer TextView -->
+    <TextView
+        android:id="@+id/odometer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/odometer"
+        android:textColor="@color/white"
+        android:textSize="26sp"
+        android:textStyle="bold" />
+
+
+    <LinearLayout
         android:id="@+id/lives"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="40dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="30dp"
         android:orientation="horizontal">
 
 
@@ -45,163 +58,919 @@
             android:scaleType="fitCenter"
             android:src="@drawable/ic_heart" />
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+    </LinearLayout>
 
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/left"
-        style="@style/Widget.Material3.Button.Icon"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="40dp"
-        android:layout_marginBottom="50dp"
-        android:backgroundTint="#C20047"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
-        app:icon="@drawable/ic_left"
-        app:iconGravity="textEnd"
-        app:iconSize="52dp" />
-
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/right"
-        style="@style/Widget.Material3.Button.Icon"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginRight="40dp"
-        android:layout_marginBottom="50dp"
-        android:backgroundTint="#C20047"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
-        app:icon="@drawable/ic_right"
-        app:iconGravity="textEnd"
-        app:iconSize="52dp" />
 
     <LinearLayout
         android:id="@+id/road"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lives"
         android:layout_marginTop="3dp"
         android:orientation="vertical"
-        android:weightSum="6">
+        android:weightSum="11">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/coin0"
+                    layout="@layout/coin" />
+
+                <include
+                    android:id="@+id/obstacle0"
+                    layout="@layout/obstacle" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/coin1"
+                    layout="@layout/coin" />
+
+                <include
+                    android:id="@+id/obstacle1"
+                    layout="@layout/obstacle" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/coin2"
+                    layout="@layout/coin" />
+
+                <include
+                    android:id="@+id/obstacle2"
+                    layout="@layout/obstacle" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/coin3"
+                    layout="@layout/coin" />
+
+                <include
+                    android:id="@+id/obstacle3"
+                    layout="@layout/obstacle" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/coin4"
+                    layout="@layout/coin" />
+
+                <include
+                    android:id="@+id/obstacle4"
+                    layout="@layout/obstacle" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/coin5"
+                    layout="@layout/coin" />
+
+                <include
+                    android:id="@+id/obstacle5"
+                    layout="@layout/obstacle" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/coin6"
+                    layout="@layout/coin" />
+
+                <include
+                    android:id="@+id/obstacle6"
+                    layout="@layout/obstacle" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/coin7"
+                    layout="@layout/coin" />
+
+                <include
+                    android:id="@+id/obstacle7"
+                    layout="@layout/obstacle" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/coin8"
+                    layout="@layout/coin" />
+
+                <include
+                    android:id="@+id/obstacle8"
+                    layout="@layout/obstacle" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/coin9"
+                    layout="@layout/coin" />
+
+                <include
+                    android:id="@+id/obstacle9"
+                    layout="@layout/obstacle" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/coin10"
+                    layout="@layout/coin" />
+
+                <include
+                    android:id="@+id/obstacle10"
+                    layout="@layout/obstacle" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/coin11"
+                    layout="@layout/coin" />
+
+                <include
+                    android:id="@+id/obstacle11"
+                    layout="@layout/obstacle" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/coin12"
+                    layout="@layout/coin" />
+
+                <include
+                    android:id="@+id/obstacle12"
+                    layout="@layout/obstacle" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/coin13"
+                    layout="@layout/coin" />
+
+                <include
+                    android:id="@+id/obstacle13"
+                    layout="@layout/obstacle" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/coin14"
+                    layout="@layout/coin" />
+
+                <include
+                    android:id="@+id/obstacle14"
+                    layout="@layout/obstacle" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/coin15"
+                    layout="@layout/coin" />
+
+                <include
+                    android:id="@+id/obstacle15"
+                    layout="@layout/obstacle" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/coin16"
+                    layout="@layout/coin" />
+
+                <include
+                    android:id="@+id/obstacle16"
+                    layout="@layout/obstacle" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/coin17"
+                    layout="@layout/coin" />
+
+                <include
+                    android:id="@+id/obstacle17"
+                    layout="@layout/obstacle" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/coin18"
+                    layout="@layout/coin" />
+
+                <include
+                    android:id="@+id/obstacle18"
+                    layout="@layout/obstacle" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/coin19"
+                    layout="@layout/coin" />
+
+                <include
+                    android:id="@+id/obstacle19"
+                    layout="@layout/obstacle" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/coin20"
+                    layout="@layout/coin" />
+
+                <include
+                    android:id="@+id/obstacle20"
+                    layout="@layout/obstacle" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/coin21"
+                    layout="@layout/coin" />
+
+                <include
+                    android:id="@+id/obstacle21"
+                    layout="@layout/obstacle" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/coin22"
+                    layout="@layout/coin" />
+
+                <include
+                    android:id="@+id/obstacle22"
+                    layout="@layout/obstacle" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/coin23"
+                    layout="@layout/coin" />
+
+                <include
+                    android:id="@+id/obstacle23"
+                    layout="@layout/obstacle" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/coin24"
+                    layout="@layout/coin" />
+
+                <include
+                    android:id="@+id/obstacle24"
+                    layout="@layout/obstacle" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/coin25"
+                    layout="@layout/coin" />
+
+                <include
+                    android:id="@+id/obstacle25"
+                    layout="@layout/obstacle" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/coin26"
+                    layout="@layout/coin" />
+
+                <include
+                    android:id="@+id/obstacle26"
+                    layout="@layout/obstacle" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/coin27"
+                    layout="@layout/coin" />
+
+                <include
+                    android:id="@+id/obstacle27"
+                    layout="@layout/obstacle" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/coin28"
+                    layout="@layout/coin" />
+
+                <include
+                    android:id="@+id/obstacle28"
+                    layout="@layout/obstacle" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/coin29"
+                    layout="@layout/coin" />
+
+                <include
+                    android:id="@+id/obstacle29"
+                    layout="@layout/obstacle" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/coin30"
+                    layout="@layout/coin" />
+
+                <include
+                    android:id="@+id/obstacle30"
+                    layout="@layout/obstacle" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/coin31"
+                    layout="@layout/coin" />
+
+                <include
+                    android:id="@+id/obstacle31"
+                    layout="@layout/obstacle" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/coin32"
+                    layout="@layout/coin" />
+
+                <include
+                    android:id="@+id/obstacle32"
+                    layout="@layout/obstacle" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/coin33"
+                    layout="@layout/coin" />
+
+                <include
+                    android:id="@+id/obstacle33"
+                    layout="@layout/obstacle" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/coin34"
+                    layout="@layout/coin" />
+
+                <include
+                    android:id="@+id/obstacle34"
+                    layout="@layout/obstacle" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/coin35"
+                    layout="@layout/coin" />
+
+                <include
+                    android:id="@+id/obstacle35"
+                    layout="@layout/obstacle" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/coin36"
+                    layout="@layout/coin" />
+
+                <include
+                    android:id="@+id/obstacle36"
+                    layout="@layout/obstacle" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/coin37"
+                    layout="@layout/coin" />
+
+                <include
+                    android:id="@+id/obstacle37"
+                    layout="@layout/obstacle" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/coin38"
+                    layout="@layout/coin" />
+
+                <include
+                    android:id="@+id/obstacle38"
+                    layout="@layout/obstacle" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/coin39"
+                    layout="@layout/coin" />
+
+                <include
+                    android:id="@+id/obstacle39"
+                    layout="@layout/obstacle" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/coin40"
+                    layout="@layout/coin" />
+
+                <include
+                    android:id="@+id/obstacle40"
+                    layout="@layout/obstacle" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/coin41"
+                    layout="@layout/coin" />
+
+                <include
+                    android:id="@+id/obstacle41"
+                    layout="@layout/obstacle" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/coin42"
+                    layout="@layout/coin" />
+
+                <include
+                    android:id="@+id/obstacle42"
+                    layout="@layout/obstacle" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/coin43"
+                    layout="@layout/coin" />
+
+                <include
+                    android:id="@+id/obstacle43"
+                    layout="@layout/obstacle" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/coin44"
+                    layout="@layout/coin" />
+
+                <include
+                    android:id="@+id/obstacle44"
+                    layout="@layout/obstacle" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:layout_marginTop="100dp"
             android:orientation="horizontal">
 
-            <include layout="@layout/obstacle"
-                android:id="@+id/obstacle0" />
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
 
-            <include layout="@layout/obstacle"
-                android:id="@+id/obstacle1" />
+                <include
+                    android:id="@+id/car0"
 
-            <include layout="@layout/obstacle"
-                android:id="@+id/obstacle2" />
+                    layout="@layout/car"
+                    android:visibility="invisible" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/car1"
+
+                    layout="@layout/car"
+                    android:visibility="invisible" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/car2"
+                    layout="@layout/car" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/car3"
+                    layout="@layout/car"
+                    android:visibility="invisible" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/car4"
+                    layout="@layout/car"
+                    android:visibility="invisible" />
+
+            </RelativeLayout>
 
         </LinearLayout>
 
-        <LinearLayout
+        <!--        <LinearLayout-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="0dp"-->
+        <!--            android:layout_weight="2"-->
+        <!--            android:orientation="horizontal"-->
+        <!--            android:layout_marginTop="10dp">-->
+
+        <!--            <com.google.android.material.button.MaterialButton-->
+        <!--                android:id="@+id/left"-->
+        <!--                style="@style/Widget.Material3.Button.Icon"-->
+        <!--                android:layout_width="70dp"-->
+        <!--                android:layout_height="60dp"-->
+        <!--                android:layout_marginLeft="130dp"-->
+        <!--                android:backgroundTint="#C20047"-->
+        <!--                app:icon="@drawable/ic_left"-->
+        <!--                app:iconSize="40dp" />-->
+
+
+        <!--            <com.google.android.material.button.MaterialButton-->
+        <!--                android:id="@+id/right"-->
+        <!--                style="@style/Widget.Material3.Button.Icon"-->
+        <!--                android:layout_width="70dp"-->
+        <!--                android:layout_height="60dp"-->
+        <!--                android:layout_marginLeft="130dp"-->
+        <!--                android:backgroundTint="#C20047"-->
+        <!--                app:icon="@drawable/ic_right"-->
+        <!--                app:iconSize="40dp" />-->
+
+        <!--        </LinearLayout>-->
+
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <include layout="@layout/obstacle"
-                android:id="@+id/obstacle3" />
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
 
-            <include layout="@layout/obstacle"
-                android:id="@+id/obstacle4" />
-
-            <include layout="@layout/obstacle"
-                android:id="@+id/obstacle5" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <include layout="@layout/obstacle"
-                android:id="@+id/obstacle6" />
-
-            <include layout="@layout/obstacle"
-                android:id="@+id/obstacle7" />
-
-            <include layout="@layout/obstacle"
-                android:id="@+id/obstacle8" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <include layout="@layout/obstacle"
-                android:id="@+id/obstacle9" />
-
-            <include layout="@layout/obstacle"
-                android:id="@+id/obstacle10" />
-
-            <include layout="@layout/obstacle"
-                android:id="@+id/obstacle11" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <include layout="@layout/obstacle"
-                android:id="@+id/obstacle12" />
-
-            <include layout="@layout/obstacle"
-                android:id="@+id/obstacle13" />
-
-            <include layout="@layout/obstacle"
-                android:id="@+id/obstacle14" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:layout_weight="0.7"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="100dp"
-            android:orientation="horizontal">
-
-            <include
-                android:visibility="invisible"
-                android:id="@+id/dragLeft"
-                layout="@layout/car" />
-
-            <include
-                android:id="@+id/dragCenter"
-                layout="@layout/car" />
-
-            <include
-                android:visibility="invisible"
-                android:id="@+id/dragRight"
-                layout="@layout/car" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/left"
+                    style="@style/Widget.Material3.Button.Icon"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:backgroundTint="#C20047"
+                    app:icon="@drawable/ic_left"
+                    app:iconSize="40dp" />
 
 
-        </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="100dp"
+                android:layout_weight="1">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/right"
+                    style="@style/Widget.Material3.Button.Icon"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:backgroundTint="#C20047"
+                    app:icon="@drawable/ic_right"
+                    app:iconSize="40dp" />
+
+
+            </RelativeLayout>
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
 
     </LinearLayout>
 

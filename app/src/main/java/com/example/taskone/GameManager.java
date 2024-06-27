@@ -10,29 +10,33 @@ public class GameManager {
     @SuppressLint("StaticFieldLeak")
 
     public static GameManager game;
-    public final int ROWS = 5, COLUMNS = 3;
-    private final boolean[][] roadMap = new boolean[ROWS][COLUMNS];
-    private int carIndex = 1;
+    private GameMode mode;
+    private final int ROWS = 9, COLUMNS = 5;
+    private final int[][] roadMap = new int[ROWS][COLUMNS]; // Coin = 2, Obstacle = 1, Empty = 0
+    private int carIndex = 2;
     private int lives = 3;
+    private int odometer = 0;
+    private int score = 0;
     private boolean isLost = false;
     private final Context context;
 
-    private GameManager(Context context) {
+    private GameManager(Context context, GameMode mode) {
         this.context = context;
         this.restartRoadMap();
+        this.mode = mode;
     }
 
 
-    public static void init(Context context) {
+    public static void init(Context context, GameMode mode) {
         if (game == null) {
             GameSignal.init(context);
-            game = new GameManager(context.getApplicationContext());
+            game = new GameManager(context.getApplicationContext(), mode);
         }
     }
 
     public void restartRoadMap() {
-        for (boolean[] booleans : this.roadMap) {
-            Arrays.fill(booleans, false);
+        for (int[] array : this.roadMap) {
+            Arrays.fill(array, 0); // Empty at start of the game
         }
     }
 
@@ -44,35 +48,63 @@ public class GameManager {
             this.carIndex--;
 
         } else if (Direction.RIGHT == direction) {
-            if (this.carIndex == 2)
+            if (this.carIndex == 4)
                 return;
             this.carIndex++;
         }
     }
 
-    public void newObstacle() {
-        int random = (int) (Math.random() * 3);
-        this.roadMap[0][random] = true;
+    public void newSpawn() {
+        int random = (int) (Math.random() * 5);
+        int coinOrObstacle = (int) (Math.random() * 3);
+        if (coinOrObstacle == 2) // Choose Coin
+            this.roadMap[0][random] = 2;
+        else                     // Choose Obstacle
+            this.roadMap[0][random] = 1;
     }
 
+
     public void updateRoadMap() {
+        odometer++;
         for (int i = getROWS() - 1; i >= 0; i--) {
             for (int j = 0; j < getCOLUMNS(); j++) {
 
-                if (isObstacleInIndex(i, j)) {
+                if (isSpawnInIndex(i, j)) {
                     if (i == getROWS() - 1) {
                         if (carIndex == j)
-                            crash();
+                            if (this.roadMap[i][j] == 1)
+                                crash();
+                            else if (this.roadMap[i][j] == 2)
+                                incrementScore();
+
                     } else
                         this.roadMap[i + 1][j] = this.roadMap[i][j];
                 }
-                this.roadMap[i][j] = false;
+                this.roadMap[i][j] = 0;
             }
         }
     }
 
-    public boolean isObstacleInIndex(int row, int column) {
-        return this.roadMap[row][column];
+    public int getOdometer() {
+        return odometer;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public int getDelay() {
+        return mode.getDelay();
+    }
+
+    private void incrementScore() {
+        score += 100;
+        GameSignal.getInstance().toast("NEW SCORE:\n" + score);
+
+    }
+
+    public boolean isSpawnInIndex(int row, int column) {
+        return this.roadMap[row][column] > 0;
     }
 
     public static GameManager getInstance() {
@@ -83,7 +115,6 @@ public class GameManager {
         return lives;
     }
 
-
     public int getROWS() {
         return ROWS;
     }
@@ -92,7 +123,7 @@ public class GameManager {
         return COLUMNS;
     }
 
-    public boolean[][] getRoadMap() {
+    public int[][] getRoadMap() {
         return roadMap;
     }
 
