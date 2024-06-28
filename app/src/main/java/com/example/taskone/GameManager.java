@@ -2,6 +2,7 @@ package com.example.taskone;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.media.MediaPlayer;
 
 import java.util.Arrays;
 
@@ -18,12 +19,14 @@ public class GameManager {
     private int odometer = 0;
     private int score = 0;
     private boolean isLost = false;
+    private MediaPlayer crashSound;
     private final Context context;
 
     private GameManager(Context context, GameMode mode) {
         this.context = context;
         this.restartRoadMap();
         this.mode = mode;
+        this.crashSound= MediaPlayer.create(context, R.raw.crash_sound);
     }
 
 
@@ -146,6 +149,7 @@ public class GameManager {
 
     public void crash() {
         lives--;
+        crashSound.start();
         if (lives == 0)
             setLost(true);
         else
