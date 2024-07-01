@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/menubg"
-    tools:context=".ActivityGame">
+    tools:context=".ActivityMenu">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -15,6 +15,17 @@
 
         >
 
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/slowNormalMode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="300dp"
+            android:minHeight="80dp"
+            android:layout_marginBottom="30dp"
+            android:text="@string/normal_slow_mode"
+            android:backgroundTint="@color/main_text_color"
+            android:textSize="25sp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/fastNormalMode"
@@ -29,16 +40,6 @@
             android:backgroundTint="@color/main_text_color"
             android:textSize="25sp" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/slowNormalMode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="300dp"
-            android:minHeight="80dp"
-            android:layout_marginBottom="30dp"
-            android:text="@string/normal_slow_mode"
-            android:backgroundTint="@color/main_text_color"
-            android:textSize="25sp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/sensorMode"

@@ -1,8 +1,9 @@
-package com.example.taskone;
+package com.example.taskone.enums;
 
 public enum GameMode {
     SLOW_MODE(850),
-    FAST_MODE(425);
+    FAST_MODE(425),
+    SENSOR_MODE(425);
 
     private final int delay;
 

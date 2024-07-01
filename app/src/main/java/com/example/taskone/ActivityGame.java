@@ -1,7 +1,15 @@
 package com.example.taskone;
 
 
+import static android.hardware.Sensor.TYPE_ACCELEROMETER;
+import static android.hardware.SensorManager.SENSOR_DELAY_NORMAL;
+
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -11,19 +19,24 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 
+import com.example.taskone.Interfaces.GameUpdater;
+import com.example.taskone.Util.TiltDetector;
+import com.example.taskone.enums.Direction;
+import com.example.taskone.enums.GameMode;
+import com.example.taskone.enums.Spawn;
 import com.google.android.material.button.MaterialButton;
+
+import java.util.Objects;
 
 public class ActivityGame extends AppCompatActivity {
 
-    private MaterialButton left;
-    private MaterialButton right;
-    private AppCompatImageView[] car;
-    private AppCompatImageView[] lives;
-    private AppCompatImageView[][] obstacles;
-    private AppCompatImageView[][] coins;
+    private MaterialButton left, right;
+    private AppCompatImageView[] car, lives;
+    private AppCompatImageView[][] obstacles, coins;
     private TextView odometer;
     private Handler ticker;
     private Runnable runnable;
+    private TiltDetector tiltDetector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +46,35 @@ public class ActivityGame extends AppCompatActivity {
         init();
     }
 
+    protected void onPause() {
+        super.onPause();
+        if (tiltDetector != null)
+            tiltDetector.stop();
+        stopTicking();
+    }
+
+    protected void onResume() {
+        super.onResume();
+        if (tiltDetector != null)
+            tiltDetector.start();
+        GameManager.getInstance().restart();
+        startTicking(1000);
+
+    }
+
+    protected void onStop() {
+        super.onStop();
+        stopTicking();
+    }
+
 
     public void init() {
+
+        odometer = findViewById(R.id.odometer);
+        left = findViewById(R.id.left);
+        right = findViewById(R.id.right);
+        left.setOnClickListener(this::move);
+        right.setOnClickListener(this::move);
 
         lives = new AppCompatImageView[]{
                 findViewById(R.id.life3),
@@ -72,77 +112,87 @@ public class ActivityGame extends AppCompatActivity {
                 {findViewById(R.id.coin40), findViewById(R.id.coin41), findViewById(R.id.coin42), findViewById(R.id.coin43), findViewById(R.id.coin44)}
         };
 
+        GameManager.init(this, (GameMode) Objects.requireNonNull(getIntent().getExtras()).getSerializable("mode"), new GameUpdater() {
 
-        odometer = findViewById(R.id.odometer);
-        left = findViewById(R.id.left);
-        right = findViewById(R.id.right);
+            @Override
+            public void spawnAppears(int i, int j, Spawn spawn) {
+                if (spawn == Spawn.COIN)
+                    coins[i][j].setVisibility(View.VISIBLE);
+                else
+                    obstacles[i][j].setVisibility(View.VISIBLE);
+            }
 
-        GameManager.init(this, GameMode.FAST_MODE);
-        left.setOnClickListener(this::move);
-        right.setOnClickListener(this::move);
-        startTicking(1000);
+            @Override
+            public void spawnDisappears(int i, int j, Spawn spawn) {
+                if (spawn == Spawn.COIN && coins[i][j].isShown())
+                    coins[i][j].setVisibility(View.INVISIBLE);
+                else if (spawn == Spawn.OBSTACLE && obstacles[i][j].isShown())
+                    obstacles[i][j].setVisibility(View.INVISIBLE);
+            }
 
+            @Override
+            public void updateLives(int livesLength) {
+                lives[0].setVisibility(livesLength >= 1 ? View.VISIBLE : View.INVISIBLE);
+                lives[1].setVisibility(livesLength >= 2 ? View.VISIBLE : View.INVISIBLE);
+                lives[2].setVisibility(livesLength >= 3 ? View.VISIBLE : View.INVISIBLE);
+            }
 
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void updateOdometer(int odometerValue) {
+                odometer.setText("Odometer: " + odometerValue);
+            }
+
+            @Override
+            public void moveCar(int carIndex) {
+                for (int i = 0; i < car.length; i++) {
+                    car[i].setVisibility(i == carIndex ? View.VISIBLE : View.INVISIBLE);
+                }
+            }
+        });
+
+        if (GameManager.getInstance().getMode() == GameMode.SENSOR_MODE) {
+            this.tiltDetector = new TiltDetector(getApplicationContext());
+            triggerSensorMode();
+        }
     }
 
-
-    private void updateLivesUI() {
-        int livesLength = GameManager.getInstance().getLives();
-        lives[0].setVisibility(livesLength >= 1 ? View.VISIBLE : View.INVISIBLE);
-        lives[1].setVisibility(livesLength >= 2 ? View.VISIBLE : View.INVISIBLE);
-        lives[2].setVisibility(livesLength >= 3 ? View.VISIBLE : View.INVISIBLE);
+    public void triggerSensorMode() {
+        left.setVisibility(View.GONE);
+        right.setVisibility(View.GONE);
+        this.tiltDetector.start();
     }
+
 
     public <T extends View> void move(T view) throws IllegalArgumentException {
-
         GameManager.getInstance().moveCar(view == left ? Direction.LEFT : Direction.RIGHT);
-        int carIndex = GameManager.getInstance().getCarIndex();
-        for (int i = 0; i < car.length; i++) {
-            car[i].setVisibility(i == carIndex ? View.VISIBLE : View.INVISIBLE);
-        }
     }
 
 
     public void tick() {
         GameManager.getInstance().updateRoadMap();
-        GameManager.getInstance().newSpawn();
-        updateRoadMapUI();
-
-        if (GameManager.getInstance().isLost())
+        if (GameManager.getInstance().isLost()) {
             GameManager.getInstance().announceAsLost();
-
-        updateLivesUI();
-    }
-
-
-    @SuppressLint("SetTextI18n")
-    public void updateRoadMapUI() {
-        this.odometer.setText("Odometer: " + GameManager.getInstance().getOdometer());
-        int[][] roadMap = GameManager.getInstance().getRoadMap();
-        for (int i = 0; i < roadMap.length; i++) {
-            for (int j = 0; j < roadMap[i].length; j++) {
-                if (roadMap[i][j] > 0) {
-                    if (roadMap[i][j] == 1) {
-                        obstacles[i][j].setVisibility(View.VISIBLE);
-                    } else {
-                        coins[i][j].setVisibility(View.VISIBLE);
-                    }
-                } else {
-                    obstacles[i][j].setVisibility(View.INVISIBLE);
-                    coins[i][j].setVisibility(View.INVISIBLE);
-
-                }
-            }
+            stopTicking();
+            Intent intent = new Intent(this, ActivityGameOver.class);
+            Bundle bundle = new Bundle();
+            bundle.putInt("score", GameManager.getInstance().getScore());
+            bundle.putInt("odometer", GameManager.getInstance().getOdometer());
+            intent.putExtras(bundle);
+            startActivity(intent);
         }
     }
+
 
     public void startTicking(int initialDelay) {
         ticker = new Handler();
         runnable = new Runnable() {
             @Override
             public void run() {
-                tick();
-                ticker.postDelayed(this, GameManager.getInstance().getDelay());
+                if (!GameManager.getInstance().isLost()) {
+                    tick();
+                    ticker.postDelayed(this, GameManager.getInstance().getDelay());
+                }
             }
         };
         ticker.postDelayed(runnable, initialDelay); // Initial delay

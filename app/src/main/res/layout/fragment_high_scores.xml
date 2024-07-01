@@ -1,0 +1,114 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/scorePanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/score_1"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:layout_gravity="center_horizontal"
+            android:backgroundTint="@color/main_text_color"
+            android:text="@string/x"
+            android:textSize="30sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/score_2"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:layout_gravity="center_horizontal"
+            android:backgroundTint="@color/main_text_color"
+            android:text="@string/x"
+            android:textSize="30sp" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/score_3"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:visibility="invisible"
+            android:backgroundTint="@color/main_text_color"
+            android:text="@string/x"
+            android:textSize="30sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/score_4"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:visibility="invisible"
+            android:backgroundTint="@color/main_text_color"
+            android:text="@string/x"
+            android:textSize="30sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/score_5"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:visibility="invisible"
+            android:backgroundTint="@color/main_text_color"
+            android:text="@string/x"
+            android:textSize="30sp" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/score_6"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:visibility="invisible"
+            android:backgroundTint="@color/main_text_color"
+            android:text="@string/x"
+            android:textSize="30sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/score_7"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:visibility="invisible"
+            android:backgroundTint="@color/main_text_color"
+            android:text="@string/x"
+            android:textSize="30sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/score_8"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:visibility="invisible"
+            android:backgroundTint="@color/main_text_color"
+            android:text="@string/x"
+            android:textSize="30sp" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/score_9"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:visibility="invisible"
+            android:backgroundTint="@color/main_text_color"
+            android:text="@string/x"
+            android:textSize="30sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/score_10"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:visibility="invisible"
+            android:backgroundTint="@color/main_text_color"
+            android:text="@string/x"
+            android:textSize="30sp" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</ScrollView>
