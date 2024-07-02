@@ -5,7 +5,7 @@ public enum GameMode {
     FAST_MODE(425),
     SENSOR_MODE(425);
 
-    private final int delay;
+    private int delay;
 
     GameMode(int delay) {
         this.delay = delay;
@@ -14,4 +14,8 @@ public enum GameMode {
     public int getDelay() {
         return delay;
     }
+    public void setDelay(int delay) {
+        this.delay = delay;
+    }
+
 }

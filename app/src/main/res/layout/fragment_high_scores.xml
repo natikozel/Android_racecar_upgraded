@@ -8,6 +8,19 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/noScoresYet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:visibility="gone"
+            android:textColor="#FFE1E1"
+            android:text="No scores yet"
+            android:textSize="30sp"
+            >
+
+        </androidx.appcompat.widget.AppCompatTextView>
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/score_1"
             android:layout_width="200dp"

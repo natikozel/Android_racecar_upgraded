@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.fragment.app.Fragment;
 
@@ -50,9 +52,11 @@ public class HighScoresFragment extends Fragment {
             ScoreManager.init(this.requireContext());
         }
         ArrayList<Score> allScores = new Gson().fromJson(ScoreManager.getInstance().loadDB(), MyScores.class).getAllScores();
+        if (allScores.isEmpty())
+            allScoreViews.findViewById(R.id.noScoresYet).setVisibility(View.VISIBLE);
         for (int i = 0; i < allScores.size(); i++) {
             Score score = allScores.get(i);
-            MaterialButton btn = (MaterialButton) allScoreViews.getChildAt(i);
+            MaterialButton btn = (MaterialButton) allScoreViews.getChildAt(i+1);
             btn.setVisibility(View.VISIBLE);
             btn.setText(score.getName() + ": " + score.getScore());
             LatLng loc = new LatLng(score.getLatitude(), score.getLongitude());
