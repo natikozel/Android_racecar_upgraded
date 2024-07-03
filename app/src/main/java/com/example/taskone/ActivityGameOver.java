@@ -36,7 +36,19 @@ public class ActivityGameOver extends AppCompatActivity {
         setContentView(R.layout.activity_game_over);
         tracker = new LocationTracker(this);
         init();
+    }
 
+
+    protected void onPause() {
+        super.onPause();
+    }
+
+    protected void onResume() {
+        super.onResume();
+    }
+
+    protected void onStop() {
+        super.onStop();
     }
 
     public void init() {
@@ -68,9 +80,6 @@ public class ActivityGameOver extends AppCompatActivity {
             });
         }
 
-
-//        LatLng location = tracker.getLocationCurrent();
-//        ScoreManager.getInstance().saveScore(editText.getText().toString(), getIntent().getIntExtra("score", 0), location.latitude, location.longitude);
         Intent intent = new Intent(getApplicationContext(), ActivityMenu.class);
         startActivity(intent);
     }

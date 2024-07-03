@@ -46,5 +46,17 @@ public class HighScoresActivity extends AppCompatActivity {
 
     }
 
+    protected void onPause() {
+        super.onPause();
+    }
+
+    protected void onResume() {
+        super.onResume();
+    }
+
+    protected void onStop() {
+        super.onStop();
+    }
+
 
 }
